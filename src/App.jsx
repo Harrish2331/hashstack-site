@@ -171,7 +171,6 @@ const NAV_LINKS = [
   { label: "Services", id: "services" },
   { label: "Work", id: "work" },
   { label: "Process", id: "process" },
-  { label: "Pricing", id: "pricing" },
   { label: "Contact", id: "contact" },
 ];
 
@@ -819,123 +818,6 @@ function Process() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  PRICING                                                             */
-/* ------------------------------------------------------------------ */
-function Pricing({ onOpenContact }) {
-  const tiers = [
-    {
-      name: "Starter",
-      price: "₹75K",
-      note: "for a single, focused site",
-      features: ["Up to 5 pages", "UI/UX design", "Responsive build", "2 weeks delivery"],
-      highlighted: false,
-    },
-    {
-      name: "Growth",
-      price: "₹2.5L",
-      note: "for product & e-commerce sites",
-      features: ["Up to 12 pages", "Custom components", "CMS integration", "SEO foundation", "4–6 weeks delivery"],
-      highlighted: true,
-    },
-    {
-      name: "Scale",
-      price: "Custom",
-      note: "for SaaS platforms & AI features",
-      features: ["Full-stack build", "AI integrations", "Dedicated team", "Ongoing support"],
-      highlighted: false,
-    },
-  ];
-  return (
-    <section id="pricing" className="relative px-6 md:px-14 py-28 md:py-36" style={{ background: C.bg2 }}>
-      <div className="max-w-[1300px] mx-auto">
-        <Reveal>
-          <p style={{ fontFamily: "'Inter'", fontSize: 12.5, fontWeight: 600, letterSpacing: "0.14em", color: C.accent, textTransform: "uppercase" }}>
-            Investment
-          </p>
-          <h2 className="mt-3" style={{ fontFamily: "'Space Grotesk'", fontWeight: 600, fontSize: "clamp(1.9rem, 3.4vw, 2.7rem)", letterSpacing: "-0.02em", color: C.text }}>
-            Pricing that scales with scope.
-          </h2>
-        </Reveal>
-        <div className="mt-14 grid md:grid-cols-3 gap-6">
-          {tiers.map((t, i) => (
-            <Reveal key={t.name} delay={i * 100}>
-              <div
-                className="hover-lift rounded-3xl p-8 h-full flex flex-col"
-                style={{
-                  background: t.highlighted ? C.text : "#fff",
-                  border: `1px solid ${t.highlighted ? C.text : C.border}`,
-                  boxShadow: t.highlighted ? "0 26px 50px -18px rgba(26,26,26,0.35)" : "none",
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: "'Inter'",
-                    fontSize: 12.5,
-                    fontWeight: 600,
-                    color: t.highlighted ? C.accent2 : C.accent,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
-                  }}
-                >
-                  {t.name}
-                </span>
-                <div
-                  style={{
-                    fontFamily: "'Space Grotesk'",
-                    fontSize: 34,
-                    fontWeight: 600,
-                    marginTop: 10,
-                    color: t.highlighted ? "#F8F7F5" : C.text,
-                  }}
-                >
-                  {t.price}
-                </div>
-                <p style={{ fontFamily: "'Inter'", fontSize: 13, color: t.highlighted ? "rgba(248,247,245,0.6)" : C.muted, marginTop: 4 }}>
-                  {t.note}
-                </p>
-                <div className="flex flex-col gap-2.5 mt-7 flex-1">
-                  {t.features.map((f) => (
-                    <div key={f} className="flex items-center gap-2.5">
-                      <span
-                        style={{
-                          width: 5,
-                          height: 5,
-                          borderRadius: 99,
-                          background: t.highlighted ? C.accent2 : C.accent,
-                          flexShrink: 0,
-                        }}
-                      />
-                      <span style={{ fontFamily: "'Inter'", fontSize: 13.5, color: t.highlighted ? "rgba(248,247,245,0.85)" : C.text }}>
-                        {f}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-                <Magnetic
-                  onClick={onOpenContact}
-                  className="mt-8 inline-flex items-center justify-center gap-1.5"
-                  style={{
-                    background: t.highlighted ? C.accent : C.bg2,
-                    color: t.highlighted ? "#1A1A1A" : C.text,
-                    fontFamily: "'Inter'",
-                    fontSize: 13.5,
-                    fontWeight: 600,
-                    padding: "12px 20px",
-                    borderRadius: 999,
-                    cursor: "pointer",
-                  }}
-                >
-                  Get Started <ArrowRight size={14} />
-                </Magnetic>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ------------------------------------------------------------------ */
 /*  TESTIMONIALS                                                        */
@@ -1080,7 +962,6 @@ function Footer({ onOpenContact }) {
         { label: "Services", id: "services" },
         { label: "Work", id: "work" },
         { label: "Process", id: "process" },
-        { label: "Pricing", id: "pricing" },
       ],
     },
     {
@@ -1530,7 +1411,6 @@ export default function HashStackLanding() {
       <Services onOpenContact={openContact} />
       <Projects onOpenContact={openContact} />
       <Process />
-      <Pricing onOpenContact={openContact} />
       <Testimonials />
       <CTA onOpenContact={openContact} />
       <Footer onOpenContact={openContact} />
