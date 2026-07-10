@@ -588,12 +588,24 @@ function Hero({ onOpenContact }) {
 /*  SOCIAL PROOF                                                       */
 /* ------------------------------------------------------------------ */
 function Stats() {
-  const stats = [
-    { n: "150+", l: "Projects Delivered" },
-    { n: "98%", l: "Client Satisfaction" },
-    { n: "4+", l: "Years Experience" },
-    { n: "12+", l: "Countries Served" },
-  ];
+ const stats = [
+  {
+    value: "12+",
+    label: "Projects Delivered",
+  },
+  {
+    value: "100%",
+    label: "Responsive & SEO Ready",
+  },
+  {
+    value: "Fast",
+    label: "Turnaround",
+  },
+  {
+    value: "24/7",
+    label: "Support",
+  },
+];
   return (
     <section className="relative z-10 px-6 md:px-14 -mt-6 md:-mt-10 pb-6">
       <div className="max-w-[1300px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -1150,18 +1162,54 @@ function Footer({ onOpenContact }) {
           className="mt-16 pt-7 flex flex-col md:flex-row items-center justify-between gap-4"
           style={{ borderTop: `1px solid ${C.border}` }}
         >
-          <span style={{ fontFamily: "'Inter'", fontSize: 12, color: C.muted }}>© 2026 HashStack. All rights reserved.</span>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "6px" }}>
-            <a href="mailto:hashstack.co.in@gmail.com" style={{ fontFamily: "'Inter'", fontSize: 12, color: C.muted, textDecoration: "none" }}>
-              hashstack.co.in@gmail.com
-            </a>
-            <a href="tel:+918072441637" style={{ fontFamily: "'Inter'", fontSize: 12, color: C.muted, textDecoration: "none" }}>
-              +91 80724 41637
-            </a>
-            <a href="tel:+919841896688" style={{ fontFamily: "'Inter'", fontSize: 12, color: C.muted, textDecoration: "none" }}>
-              +91 98418 96688
-            </a>
-          </div>
+          <span style={{ fontFamily: "'Inter'", fontSize: 12, color: C.muted }}>
+  © 2026 HashStack. All rights reserved.
+</span>
+
+<div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-end",
+    gap: "6px",
+  }}
+>
+  <a
+    href="mailto:hashstack.co.in@gmail.com"
+    style={{
+      fontFamily: "'Inter'",
+      fontSize: 12,
+      color: C.muted,
+      textDecoration: "none",
+    }}
+  >
+    hashstack.co.in@gmail.com
+  </a>
+
+  <a
+    href="tel:+918072441637"
+    style={{
+      fontFamily: "'Inter'",
+      fontSize: 12,
+      color: C.muted,
+      textDecoration: "none",
+    }}
+  >
+    +91 80724 41637
+  </a>
+
+  <a
+    href="tel:+919841896688"
+    style={{
+      fontFamily: "'Inter'",
+      fontSize: 12,
+      color: C.muted,
+      textDecoration: "none",
+    }}
+  >
+    +91 98418 96688
+  </a>
+</div>
         </div>
       </div>
     </footer>
