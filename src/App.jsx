@@ -628,9 +628,9 @@ function Stats() {
                   color: C.text,
                 }}
               >
-                {s.n}
+                {s.value}
               </div>
-              <div style={{ fontFamily: "'Inter'", fontSize: 12.5, color: C.muted, marginTop: 4 }}>{s.l}</div>
+              <div style={{ fontFamily: "'Inter'", fontSize: 12.5, color: C.muted, marginTop: 4 }}>{s.label}</div>
             </div>
           </Reveal>
         ))}
