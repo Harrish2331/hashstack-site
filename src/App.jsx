@@ -1141,11 +1141,41 @@ function ContactModal({ open, onClose }) {
     return Object.keys(errs).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!validate()) return;
-    setSubmitted(true);
-  };
+
+    try {
+        const response = await fetch(
+            "https://hashstack-backend.onrender.com/api/contact",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: form.name,
+                    email: form.email,
+                    budget: form.budget,
+                    content: form.message
+                }),
+            }
+        );
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            setSubmitted(true);
+        } else {
+            alert(data.message);
+        }
+
+    } catch (err) {
+        console.error(err);
+        alert("Unable to connect to the server.");
+    }
+};
 
   return (
     <div
