@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import config from "./config.json";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -609,7 +610,7 @@ function Stats() {
     <section className="relative z-10 px-6 md:px-14 -mt-6 md:-mt-10 pb-6">
       <div className="max-w-[1300px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
         {stats.map((s, i) => (
-          <Reveal key={s.l} delay={i * 90}>
+          <Reveal key={i} delay={i * 90}>
             <div
               className="rounded-2xl px-6 py-7 text-center hover-lift"
               style={{
@@ -711,10 +712,31 @@ function Services({ onOpenContact }) {
 /* ------------------------------------------------------------------ */
 function Projects({ onOpenContact }) {
   const projects = [
-    { name: "Northline Bank", cat: "Fintech", tech: "Next.js · Node", tall: true, g: ["#1A1A1A", "#3a3a3a"] },
-    { name: "Orbit Analytics", cat: "SaaS Dashboard", tech: "React · D3", tall: false, g: [C.accent, C.accent2] },
-    { name: "Verdant", cat: "E-commerce", tech: "Shopify · Tailwind", tall: false, g: ["#4C8C6A", "#8FD19E"] },
-    { name: "Studio Palet", cat: "Branding Site", tech: "Webflow", tall: true, g: ["#8B5CF6", "#C4B5FD"] },
+    {
+      name: "M.G. Iyengar Bakery & Chats",
+      cat: "Business Website",
+      tech: "React · Vite · WhatsApp API",
+      tall: true,
+      image: "/Projects/MG Bakery.png",
+      link: "https://mg-bakery.vercel.app"
+    },
+    {
+      name: "S R Industries",
+      cat: "Corporate / Industrial Website",
+      tech: "React · Vite · Node.js · Express · Nodemailer",
+      tall: true,
+      image: "/Projects/SR Industries.png",
+      link: null
+    },
+    {
+      name: "HNS United",
+      cat: "E-Commerce Website",
+      tech: "React · Vite · WhatsApp API",
+      tall: true,
+      wide: true,
+      image: "/Projects/HNS United.png",
+      link: "https://hnsunited.in/"
+    }
   ];
   return (
     <section id="work" className="relative px-6 md:px-14 py-16 md:py-24" style={{ background: C.bg2 }}>
@@ -729,16 +751,23 @@ function Projects({ onOpenContact }) {
         </Reveal>
         <div className="mt-14 grid md:grid-cols-2 gap-6">
           {projects.map((p, i) => (
-            <Reveal key={p.name} delay={i * 100}>
+            <Reveal key={p.name} delay={i * 100} className={p.wide ? "md:col-span-2" : ""}>
               <div
                 role="button"
                 tabIndex={0}
-                onClick={onOpenContact}
-                onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && onOpenContact()}
+                onClick={() => p.link ? window.open(p.link, "_blank", "noopener,noreferrer") : onOpenContact()}
+                onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (p.link ? window.open(p.link, "_blank", "noopener,noreferrer") : onOpenContact())}
                 className="project-card relative rounded-3xl overflow-hidden group cursor-pointer"
-                style={{ height: p.tall ? 420 : 320, background: `linear-gradient(150deg, ${p.g[0]}, ${p.g[1]})` }}
+                style={{ height: p.tall ? 420 : 320 }}
               >
-                <div className="project-zoom absolute inset-0" />
+                <div
+                  className="project-zoom absolute inset-0"
+                  style={{
+                    background: p.image
+                      ? `url("${p.image}") center/cover no-repeat`
+                      : `linear-gradient(150deg, ${p.g[0]}, ${p.g[1]})`
+                  }}
+                />
                 <div className="absolute inset-0 flex flex-col justify-end p-8" style={{ background: "linear-gradient(0deg, rgba(0,0,0,0.55), transparent 55%)" }}>
                   <div className="project-reveal">
                     <span style={{ fontFamily: "'Inter'", fontSize: 11.5, fontWeight: 600, letterSpacing: "0.08em", color: "#fff", opacity: 0.8, textTransform: "uppercase" }}>
@@ -823,16 +852,34 @@ function Process() {
 /*  TESTIMONIALS                                                        */
 /* ------------------------------------------------------------------ */
 function Testimonials() {
-  const items = [
-    { name: "Elena Ross", co: "Northline Bank", review: "HashStack rebuilt our platform end to end. The engineering quality was on another level.", rating: 5 },
-    { name: "Marcus Webb", co: "Orbit Analytics", review: "Fast, precise, and genuinely thoughtful about product decisions, not just pixels.", rating: 5 },
-    { name: "Priya Nair", co: "Verdant", review: "Our conversion rate jumped within weeks of launch. Worth every rupee.", rating: 5 },
-  ];
+const items = [
+  {
+    name: "M.G. Iyengar Bakery Owner",
+    co: "M.G. Iyengar Bakery & Chats",
+    review:
+      "Since launching our new website, customers have been able to browse our menu and place custom cake orders much more easily through WhatsApp. It has improved our online visibility, reduced the time spent answering repetitive queries, and helped us receive more enquiries from new customers.",
+    rating: 5,
+  },
+  {
+    name: "G. Rengaraj",
+    co: "S R Industries",
+    review:
+      "The website has given our company a professional online presence and made it easier for potential clients to understand our services. We've started receiving genuine business enquiries through the contact form, and it has strengthened our credibility when approaching new customers.",
+    rating: 5,
+  },
+  {
+    name: "Shyam",
+    co: "HNS United",
+    review:
+      "The website has made it much easier for customers to explore our jersey collection and order directly through WhatsApp. It has increased customer engagement, simplified the ordering process, and helped us reach buyers beyond our local network.",
+    rating: 5,
+  },
+];
   const [idx, setIdx] = useState(0);
   useEffect(() => {
     const t = setInterval(() => setIdx((i) => (i + 1) % items.length), 4500);
     return () => clearInterval(t);
-  }, []);
+  }, [items.length]);
   return (
     <section className="relative px-6 md:px-14 py-16 md:py-24" style={{ background: C.bg2 }}>
       <div className="max-w-[720px] mx-auto text-center">
@@ -1104,6 +1151,7 @@ function ContactModal({ open, onClose }) {
   const [form, setForm] = useState({ name: "", email: "", budget: "Starter", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -1121,6 +1169,7 @@ function ContactModal({ open, onClose }) {
     if (!open) {
       const t = setTimeout(() => {
         setSubmitted(false);
+        setLoading(false);
         setForm({ name: "", email: "", budget: "Starter", message: "" });
         setErrors({});
       }, 350);
@@ -1145,37 +1194,8 @@ function ContactModal({ open, onClose }) {
     e.preventDefault();
 
     if (!validate()) return;
-
-    try {
-        const response = await fetch(
-            "https://hashstack-backend.onrender.com/api/contact",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    name: form.name,
-                    email: form.email,
-                    budget: form.budget,
-                    content: form.message
-                }),
-            }
-        );
-
-        const data = await response.json();
-
-        if (response.ok && data.success) {
-            setSubmitted(true);
-        } else {
-            alert(data.message);
-        }
-
-    } catch (err) {
-        console.error(err);
-        alert("Unable to connect to the server.");
-    }
-};
+    setSubmitted(true);
+  };
 
   return (
     <div
@@ -1277,18 +1297,22 @@ function ContactModal({ open, onClose }) {
               </div>
               <Magnetic
                 as="button"
+                type="submit"
+                disabled={loading}
                 className="inline-flex items-center justify-center gap-2 mt-2"
                 style={{
-                  background: C.text,
+                  background: loading ? C.muted : C.text,
                   color: "#F8F7F5",
                   fontFamily: "'Inter'",
                   fontSize: 14,
                   fontWeight: 600,
                   padding: "14px 24px",
                   borderRadius: 999,
+                  cursor: loading ? "not-allowed" : "pointer",
+                  opacity: loading ? 0.75 : 1,
                 }}
               >
-                Send Message <ArrowRight size={15} />
+                {loading ? "Sending..." : "Send Message"} {!loading && <ArrowRight size={15} />}
               </Magnetic>
             </form>
           </>
