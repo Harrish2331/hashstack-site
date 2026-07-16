@@ -1194,8 +1194,79 @@ function ContactModal({ open, onClose }) {
     e.preventDefault();
 
     if (!validate()) return;
-    setSubmitted(true);
-  };
+
+    const mailtoSubject = encodeURIComponent("New Project Inquiry - HashStack");
+    const mailtoBody = `Name: ${form.name}\nEmail: ${form.email}\nBudget: ${form.budget}\n\nProject Details:\n${form.message}`;
+    const mailtoUrl = `mailto:hashstack.co.in@gmail.com?subject=${mailtoSubject}&body=${encodeURIComponent(mailtoBody)}`;
+
+    // If Web3Forms key is not set, fall back to mailto directly
+    if (!config.web3forms_key || config.web3forms_key.trim() === "") {
+        const confirmMsg = "Direct submission is not configured (missing access key).\n\nWould you like to send this enquiry via your default email client instead?\n\n(Tip: Get a free Access Key at web3forms.com and paste it in src/config.json to enable direct submissions)";
+        if (confirm(confirmMsg)) {
+            window.location.href = mailtoUrl;
+        }
+        return;
+    }
+
+    setLoading(true);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 12000); // 12 second timeout
+
+    try {
+        const response = await fetch(
+            "https://api.web3forms.com/submit",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    access_key: config.web3forms_key,
+                    name: form.name,
+                    email: form.email,
+                    budget: form.budget,
+                    message: form.message,
+                    subject: "New Project Inquiry - HashStack Site"
+                }),
+                signal: controller.signal
+            }
+        );
+
+        clearTimeout(timeoutId);
+
+        let data = {};
+        const responseText = await response.text();
+        try {
+            data = JSON.parse(responseText);
+        } catch (parseErr) {
+            console.error("JSON parsing error on response:", responseText, parseErr);
+        }
+
+        if (response.ok && (data.success === "true" || data.success === true)) {
+            setSubmitted(true);
+        } else {
+            if (confirm(data.message || "Failed to submit form. Would you like to send this enquiry via your default email client instead?")) {
+                window.location.href = mailtoUrl;
+            }
+        }
+
+    } catch (err) {
+        clearTimeout(timeoutId);
+        console.error(err);
+        
+        let msg = "Unable to connect to the server.";
+        if (err.name === 'AbortError') {
+            msg = "Connection timed out. Please check your internet connection and try again.";
+        }
+        
+        if (confirm(`${msg}\n\nWould you like to send this enquiry via your default email client instead?`)) {
+            window.location.href = mailtoUrl;
+        }
+    } finally {
+        setLoading(false);
+    }
+};
 
   return (
     <div
