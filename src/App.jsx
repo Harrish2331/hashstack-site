@@ -1151,6 +1151,7 @@ function ContactModal({ open, onClose }) {
   const [form, setForm] = useState({ name: "", email: "", budget: "Starter", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+  const [submitError, setSubmitError] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -1170,6 +1171,7 @@ function ContactModal({ open, onClose }) {
       const t = setTimeout(() => {
         setSubmitted(false);
         setLoading(false);
+        setSubmitError("");
         setForm({ name: "", email: "", budget: "Starter", message: "" });
         setErrors({});
       }, 350);
@@ -1194,6 +1196,7 @@ function ContactModal({ open, onClose }) {
     e.preventDefault();
 
     if (!validate()) return;
+    setSubmitError("");
 
     const mailtoSubject = encodeURIComponent("New Project Inquiry - HashStack");
     const mailtoBody = `Name: ${form.name}\nEmail: ${form.email}\nBudget: ${form.budget}\n\nProject Details:\n${form.message}`;
@@ -1201,10 +1204,7 @@ function ContactModal({ open, onClose }) {
 
     // If Web3Forms key is not set, fall back to mailto directly
     if (!config.web3forms_key || config.web3forms_key.trim() === "") {
-        const confirmMsg = "Direct submission is not configured (missing access key).\n\nWould you like to send this enquiry via your default email client instead?\n\n(Tip: Get a free Access Key at web3forms.com and paste it in src/config.json to enable direct submissions)";
-        if (confirm(confirmMsg)) {
-            window.location.href = mailtoUrl;
-        }
+        setSubmitError("Form configuration missing. Please use direct email: hashstack.co.in@gmail.com");
         return;
     }
 
@@ -1246,9 +1246,7 @@ function ContactModal({ open, onClose }) {
         if (response.ok && (data.success === "true" || data.success === true)) {
             setSubmitted(true);
         } else {
-            if (confirm(data.message || "Failed to submit form. Would you like to send this enquiry via your default email client instead?")) {
-                window.location.href = mailtoUrl;
-            }
+            setSubmitError(data.message || "Failed to submit form. Please email us directly.");
         }
 
     } catch (err) {
@@ -1257,12 +1255,9 @@ function ContactModal({ open, onClose }) {
         
         let msg = "Unable to connect to the server.";
         if (err.name === 'AbortError') {
-            msg = "Connection timed out. Please check your internet connection and try again.";
+            msg = "Connection timed out. Please check your internet connection.";
         }
-        
-        if (confirm(`${msg}\n\nWould you like to send this enquiry via your default email client instead?`)) {
-            window.location.href = mailtoUrl;
-        }
+        setSubmitError(msg);
     } finally {
         setLoading(false);
     }
@@ -1366,6 +1361,37 @@ function ContactModal({ open, onClose }) {
                 />
                 {errors.message && <span className="modal-error">{errors.message}</span>}
               </div>
+
+              {/* Inline submission error — shown instead of window.confirm() which is blocked on hosted environments */}
+              {submitError && (
+                <div
+                  style={{
+                    background: "rgba(224,72,62,0.07)",
+                    border: "1px solid rgba(224,72,62,0.22)",
+                    borderRadius: 12,
+                    padding: "12px 16px",
+                  }}
+                >
+                  <p style={{ fontFamily: "'Inter'", fontSize: 13, color: "#C0362C", margin: 0 }}>
+                    {submitError}
+                  </p>
+                  <a
+                    href={`mailto:hashstack.co.in@gmail.com?subject=${encodeURIComponent("New Project Inquiry - HashStack")}&body=${encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\nBudget: ${form.budget}\n\nProject Details:\n${form.message}`)}`}
+                    style={{
+                      display: "inline-block",
+                      marginTop: 8,
+                      fontFamily: "'Inter'",
+                      fontSize: 12.5,
+                      fontWeight: 600,
+                      color: C.accent,
+                      textDecoration: "underline",
+                    }}
+                  >
+                    Email us directly instead →
+                  </a>
+                </div>
+              )}
+
               <Magnetic
                 as="button"
                 type="submit"
