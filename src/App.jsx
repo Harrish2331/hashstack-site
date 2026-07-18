@@ -588,24 +588,24 @@ function Hero({ onOpenContact }) {
 /*  SOCIAL PROOF                                                       */
 /* ------------------------------------------------------------------ */
 function Stats() {
- const stats = [
-  {
-    value: "12+",
-    label: "Projects Delivered",
-  },
-  {
-    value: "100%",
-    label: "Responsive & SEO Ready",
-  },
-  {
-    value: "Fast",
-    label: "Turnaround",
-  },
-  {
-    value: "24/7",
-    label: "Support",
-  },
-];
+  const stats = [
+    {
+      value: "12+",
+      label: "Projects Delivered",
+    },
+    {
+      value: "100%",
+      label: "Responsive & SEO Ready",
+    },
+    {
+      value: "Fast",
+      label: "Turnaround",
+    },
+    {
+      value: "24/7",
+      label: "Support",
+    },
+  ];
   return (
     <section className="relative z-10 px-6 md:px-14 -mt-6 md:-mt-10 pb-6">
       <div className="max-w-[1300px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -852,29 +852,29 @@ function Process() {
 /*  TESTIMONIALS                                                        */
 /* ------------------------------------------------------------------ */
 function Testimonials() {
-const items = [
-  {
-    name: "M.G. Iyengar Bakery Owner",
-    co: "M.G. Iyengar Bakery & Chats",
-    review:
-      "Since launching our new website, customers have been able to browse our menu and place custom cake orders much more easily through WhatsApp. It has improved our online visibility, reduced the time spent answering repetitive queries, and helped us receive more enquiries from new customers.",
-    rating: 5,
-  },
-  {
-    name: "G. Rengaraj",
-    co: "S R Industries",
-    review:
-      "The website has given our company a professional online presence and made it easier for potential clients to understand our services. We've started receiving genuine business enquiries through the contact form, and it has strengthened our credibility when approaching new customers.",
-    rating: 5,
-  },
-  {
-    name: "Shyam",
-    co: "HNS United",
-    review:
-      "The website has made it much easier for customers to explore our jersey collection and order directly through WhatsApp. It has increased customer engagement, simplified the ordering process, and helped us reach buyers beyond our local network.",
-    rating: 5,
-  },
-];
+  const items = [
+    {
+      name: "M.G. Iyengar Bakery Owner",
+      co: "M.G. Iyengar Bakery & Chats",
+      review:
+        "Our new website has helped customers easily browse our bakery menu and place custom cake orders through WhatsApp. It has increased customer enquiries, improved our online visibility, and made ordering far more convenient for everyone.",
+      rating: 5,
+    },
+    {
+      name: "G. Rengaraj",
+      co: "S R Industries",
+      review:
+        "Having a professional website has helped us showcase our fabrication services and attract serious business enquiries with confidence. It has strengthened our company image, improved client trust, and created valuable opportunities for growth.",
+      rating: 5,
+    },
+    {
+      name: "Shyam",
+      co: "HNS United",
+      review:
+        "Customers can now explore our latest jersey collection online and place their orders directly through WhatsApp without any hassle. It has boosted customer engagement, simplified the buying process, and expanded our reach to new buyers.",
+      rating: 5,
+    },
+  ];
   const [idx, setIdx] = useState(0);
   useEffect(() => {
     const t = setInterval(() => setIdx((i) => (i + 1) % items.length), 4500);
@@ -1091,53 +1091,53 @@ function Footer({ onOpenContact }) {
           style={{ borderTop: `1px solid ${C.border}` }}
         >
           <span style={{ fontFamily: "'Inter'", fontSize: 12, color: C.muted }}>
-  © 2026 HashStack. All rights reserved.
-</span>
+            © 2026 HashStack. All rights reserved.
+          </span>
 
-<div
-  style={{
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-end",
-    gap: "6px",
-  }}
->
-  <a
-    href="mailto:hashstack.co.in@gmail.com"
-    style={{
-      fontFamily: "'Inter'",
-      fontSize: 12,
-      color: C.muted,
-      textDecoration: "none",
-    }}
-  >
-    hashstack.co.in@gmail.com
-  </a>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
+              gap: "6px",
+            }}
+          >
+            <a
+              href="mailto:hashstack.co.in@gmail.com"
+              style={{
+                fontFamily: "'Inter'",
+                fontSize: 12,
+                color: C.muted,
+                textDecoration: "none",
+              }}
+            >
+              hashstack.co.in@gmail.com
+            </a>
 
-  <a
-    href="tel:+918072441637"
-    style={{
-      fontFamily: "'Inter'",
-      fontSize: 12,
-      color: C.muted,
-      textDecoration: "none",
-    }}
-  >
-    +91 80724 41637
-  </a>
+            <a
+              href="tel:+918072441637"
+              style={{
+                fontFamily: "'Inter'",
+                fontSize: 12,
+                color: C.muted,
+                textDecoration: "none",
+              }}
+            >
+              +91 80724 41637
+            </a>
 
-  <a
-    href="tel:+919841896688"
-    style={{
-      fontFamily: "'Inter'",
-      fontSize: 12,
-      color: C.muted,
-      textDecoration: "none",
-    }}
-  >
-    +91 98418 96688
-  </a>
-</div>
+            <a
+              href="tel:+919841896688"
+              style={{
+                fontFamily: "'Inter'",
+                fontSize: 12,
+                color: C.muted,
+                textDecoration: "none",
+              }}
+            >
+              +91 98418 96688
+            </a>
+          </div>
         </div>
       </div>
     </footer>
@@ -1204,8 +1204,8 @@ function ContactModal({ open, onClose }) {
 
     // If Web3Forms key is not set, fall back to mailto directly
     if (!config.web3forms_key || config.web3forms_key.trim() === "") {
-        setSubmitError("Form configuration missing. Please use direct email: hashstack.co.in@gmail.com");
-        return;
+      setSubmitError("Form configuration missing. Please use direct email: hashstack.co.in@gmail.com");
+      return;
     }
 
     setLoading(true);
@@ -1213,55 +1213,55 @@ function ContactModal({ open, onClose }) {
     const timeoutId = setTimeout(() => controller.abort(), 12000); // 12 second timeout
 
     try {
-        const response = await fetch(
-            "https://api.web3forms.com/submit",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({
-                    access_key: config.web3forms_key,
-                    name: form.name,
-                    email: form.email,
-                    budget: form.budget,
-                    message: form.message,
-                    subject: "New Project Inquiry - HashStack Site"
-                }),
-                signal: controller.signal
-            }
-        );
-
-        clearTimeout(timeoutId);
-
-        let data = {};
-        const responseText = await response.text();
-        try {
-            data = JSON.parse(responseText);
-        } catch (parseErr) {
-            console.error("JSON parsing error on response:", responseText, parseErr);
+      const response = await fetch(
+        "https://api.web3forms.com/submit",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            access_key: config.web3forms_key,
+            name: form.name,
+            email: form.email,
+            budget: form.budget,
+            message: form.message,
+            subject: "New Project Inquiry - HashStack Site"
+          }),
+          signal: controller.signal
         }
+      );
 
-        if (response.ok && (data.success === "true" || data.success === true)) {
-            setSubmitted(true);
-        } else {
-            setSubmitError(data.message || "Failed to submit form. Please email us directly.");
-        }
+      clearTimeout(timeoutId);
+
+      let data = {};
+      const responseText = await response.text();
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseErr) {
+        console.error("JSON parsing error on response:", responseText, parseErr);
+      }
+
+      if (response.ok && (data.success === "true" || data.success === true)) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(data.message || "Failed to submit form. Please email us directly.");
+      }
 
     } catch (err) {
-        clearTimeout(timeoutId);
-        console.error(err);
-        
-        let msg = "Unable to connect to the server.";
-        if (err.name === 'AbortError') {
-            msg = "Connection timed out. Please check your internet connection.";
-        }
-        setSubmitError(msg);
+      clearTimeout(timeoutId);
+      console.error(err);
+
+      let msg = "Unable to connect to the server.";
+      if (err.name === 'AbortError') {
+        msg = "Connection timed out. Please check your internet connection.";
+      }
+      setSubmitError(msg);
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
+  };
 
   return (
     <div
