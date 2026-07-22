@@ -590,7 +590,7 @@ function Hero({ onOpenContact }) {
 function Stats() {
   const stats = [
     {
-      value: "12+",
+      value: "25+",
       label: "Projects Delivered",
     },
     {
@@ -1021,11 +1021,7 @@ function Footer({ onOpenContact }) {
       ],
     },
   ];
-  const socials = [
-    { s: "IG", href: "https://instagram.com" },
-    { s: "X", href: "https://x.com" },
-    { s: "IN", href: "https://linkedin.com" },
-  ];
+
   return (
     <footer className="relative px-6 md:px-14 pt-20 pb-10" style={{ borderTop: `1px solid ${C.border}` }}>
       <div className="max-w-[1300px] mx-auto">
@@ -1037,21 +1033,7 @@ function Footer({ onOpenContact }) {
             <p style={{ fontFamily: "'Inter'", fontSize: 13.5, color: C.muted, marginTop: 16, maxWidth: 280, lineHeight: 1.6 }}>
               Crafting digital experiences that scale. A premium web development studio.
             </p>
-            <div className="flex gap-3 mt-6">
-              {socials.map(({ s, href }) => (
-                <a
-                  key={s}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s}
-                  className="flex items-center justify-center rounded-full hover-lift"
-                  style={{ width: 36, height: 36, border: `1px solid ${C.border}`, fontFamily: "'Inter'", fontSize: 11, fontWeight: 600, color: C.text, cursor: "pointer" }}
-                >
-                  {s}
-                </a>
-              ))}
-            </div>
+
           </div>
           {cols.map((c) => (
             <div key={c.h}>
@@ -1091,7 +1073,7 @@ function Footer({ onOpenContact }) {
           style={{ borderTop: `1px solid ${C.border}` }}
         >
           <span style={{ fontFamily: "'Inter'", fontSize: 12, color: C.muted }}>
-            © 2026 HashStack. All rights reserved.
+            © HashStack. All rights reserved.
           </span>
 
           <div
